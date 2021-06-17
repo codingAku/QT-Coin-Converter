@@ -6,6 +6,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QTableWidget>
+#include <QMainWindow>
 
 class MyClass : public QLabel
 {
@@ -13,8 +15,12 @@ class MyClass : public QLabel
 
     public:
       MyClass(QStringList *coins, QWidget *parent = 0);
-      QString name;
       QStringList *coins;
+      QTableWidgetItem *ece;
+      QTableWidget *table;
+      QMap<QString, QString> *SymbolMap;
+
+
 
 
     public slots:

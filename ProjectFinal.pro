@@ -9,3 +9,7 @@ SOURCES += \
 QT += widgets \
     network
     core
+
+DISTFILES += \
+    file.txt \
+    file.txt.txt

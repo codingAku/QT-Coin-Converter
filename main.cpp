@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <iostream>
 #include <fstream>
+#include <QMainWindow>
 
 
 #include "myclass.h"
@@ -14,25 +15,39 @@
 int main(int argc,char *argv[])
 {
    QApplication a(argc, argv);
-   const char* env = std::getenv("MYCRYPTOCONVERT");
-   std::ifstream MyReadFile(env);
+   const char* tmp = std::getenv("MYCRYPTOCONVERT");
+   std::string env(tmp ? tmp : "");
    std::string myText;
    QStringList *coins = new QStringList();
 
 
 
    // Use a while loop together with the getline() function to read the file line by line
-   while (getline (MyReadFile, myText)) {
-     // Output the text from the file
-     QString qstr = QString::fromStdString(myText);
-     coins->append(qstr);
+   //QFile file(tmp);
 
-   }
+   //QTextStream in(&file);
 
+  /* while(!in.atEnd()) {
+       QString line = in.readLine();
+       coins->append(line);
+   }*/
+     coins->append("Bitcoin");
+     coins->append("Ethereum");
+     coins->append("zoc");
+     coins->append("Litecoin");
+     coins->append("Monero");
+     coins->append("Zcash");
+     //coins->append("0chain");
    MyClass my(coins);
 
+   QMainWindow *mw = new QMainWindow;
+   //this->table = new QTableWidget(this->coins->length(), 3);
+   //table->setHorizontalHeaderLabels({"USD", "EUR", "GBP"});
+   mw->setCentralWidget(my.table);
+   mw->show();
 
-   my.show();
+
+  // my.show();
 
 
 
