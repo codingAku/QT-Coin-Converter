@@ -11,7 +11,11 @@
 
 
 #include "myclass.h"
-
+using namespace std;
+//Main method of the program.
+//Environment variable's value is read here and QMainWindow is created here. QTable of the MyClass object is also attached to it here.
+//Names of the coins are read from the input file and stored in MyClass object's QStringList named "coins".
+//Filling of the table and fetch of the values from API is done inside MyClass constructor. In main, MyClass object's constructor is called.
 int main(int argc,char *argv[])
 {
    QApplication a(argc, argv);
@@ -20,36 +24,21 @@ int main(int argc,char *argv[])
    std::string myText;
    QStringList *coins = new QStringList();
 
+   std::ifstream reader(env);
+   std::string coin;
 
 
-   // Use a while loop together with the getline() function to read the file line by line
-   //QFile file(tmp);
+while(getline(reader,coin)){
 
-   //QTextStream in(&file);
+     QString qstr = QString::fromStdString(coin);
+     coins->append(qstr);
 
-  /* while(!in.atEnd()) {
-       QString line = in.readLine();
-       coins->append(line);
-   }*/
-     coins->append("Bitcoin");
-     coins->append("Ethereum");
-     coins->append("zoc");
-     coins->append("Litecoin");
-     coins->append("Monero");
-     coins->append("Zcash");
-     //coins->append("0chain");
+}
    MyClass my(coins);
 
    QMainWindow *mw = new QMainWindow;
-   //this->table = new QTableWidget(this->coins->length(), 3);
-   //table->setHorizontalHeaderLabels({"USD", "EUR", "GBP"});
    mw->setCentralWidget(my.table);
    mw->show();
-
-
-  // my.show();
-
-
 
    return a.exec();
 }
